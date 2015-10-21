@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DecodeMTL - Github dashboard</title>
+  <link rel="stylesheet" type="text/css" href="../assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/keen-dashboards.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  
+</head>
+<body class="application">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">DecodeMTL - Github dashboard</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="https://github.com/DecodeMTL">Github</a></li>
+          <li><a href="https://github.com/orgs/DecodeMTL/people">Students</a></li>
+          <li><a href="https://github.com/orgs/DecodeMTL/teams">Teams</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <div class="chart-wrapper">
+        <div class="chart-title">
+          Number of pull requests open and closed
+          <small class="pull-right">
+            <label class="pull-left" style="margin-right: 10px;">
+              Team:
+              <select id="first-choice">
+                <option selected value="base">Please Select</option>
+                <option value="allcohorts">All cohorts</option>
+                <option value="cohort1">Cohort-1</option>
+                <option value="cohort2">Cohort-2</option>
+                <option value="cohort3">Cohort-3</option>
+              </select>
+            </label>
+            <label>
+              Student:
+              <select id="second-choice">
+                <option>Please choose a team</option>
+              </select>
+            </label>
+          </small>
+          <script>
+          $("#first-choice").change(function() {
+        	var $dropdown = $(this);
+        
+        	$.getJSON("data.json", function(data) {
+        	
+        		var key = $dropdown.val();
+        		var vals = [];
+        							
+        		switch(key) {
+        			case 'allcohorts':
+        				vals = data.allcohorts.split(",");
+        				break;
+        			case 'cohort1':
+        				vals = data.cohort1.split(",");
+        				break;
+        			case 'cohort2':
+        				vals = data.cohort2.split(",");
+        				break;
+        			case 'cohort3':
+        				vals = data.cohort3.split(",");
+        				break;
+        			case 'base':
+        				vals = ['Please choose a team'];
+        		}
+        		
+        		var $secondChoice = $("#second-choice");
+        		$secondChoice.empty();
+        		$.each(vals, function(index, value) {
+        			$secondChoice.append("<option>" + value + "</option>");
+        		});
+        
+        	});
+        });
+        </script>
+          
+        </div>
+        <div class="chart-stage">
+          <img data-src="holder.js/100%x250/white">
+        </div>
+        <div class="chart-notes">
+          Select a specific day to get insights
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Total number of closed pull requests
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x350/white">
+          </div>
+          <div class="chart-notes">
+            Notes:
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Average number of comments per pull request
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x350/white">
+          </div>
+          <div class="chart-notes">
+            Notes:
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Number of tests failed and passed
+            
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x350/white">
+          </div>
+          <div class="chart-notes">
+            Ratio:
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    
+
+    <hr>
+
+    <p class="small text-muted">Built with &#9829; by the Githubbers</a></p>
+
+  </div>
+
+  <script type="text/javascript" src="../assets/lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="../assets/lib/holderjs/holder.js"></script>
+  <script>
+    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+  </script>
+
+  <script type="text/javascript" src="../assets/lib/keen-js/dist/keen.min.js"></script>
+  <script type="text/javascript" src="../assets/js/meta.js"></script>
+
+</body>
+</html>
